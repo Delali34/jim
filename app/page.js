@@ -6,6 +6,56 @@ const WeddingOrderOfService = () => {
   const [animationStep, setAnimationStep] = useState(0);
 
   useEffect(() => {
+    // Add custom animations styles only on client side
+    const style = document.createElement("style");
+    style.textContent = `
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+      
+      @keyframes slideDown {
+        from { opacity: 0; transform: translateY(-30px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      
+      @keyframes slideLeft {
+        from { opacity: 0; transform: translateX(-50px); }
+        to { opacity: 1; transform: translateX(0); }
+      }
+      
+      @keyframes slideRight {
+        from { opacity: 0; transform: translateX(50px); }
+        to { opacity: 1; transform: translateX(0); }
+      }
+      
+      @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      
+      .animate-fadeIn {
+        animation: fadeIn 1s ease-out;
+      }
+      
+      .animate-slideDown {
+        animation: slideDown 1s ease-out 0.2s both;
+      }
+      
+      .animate-slideLeft {
+        animation: slideLeft 1s ease-out 0.4s both;
+      }
+      
+      .animate-slideRight {
+        animation: slideRight 1s ease-out 0.6s both;
+      }
+      
+      .animate-fadeInUp {
+        animation: fadeInUp 1s ease-out 0.8s both;
+      }
+    `;
+    document.head.appendChild(style);
+
     const timer1 = setTimeout(() => setAnimationStep(1), 500);
     const timer2 = setTimeout(() => setAnimationStep(2), 1500);
     const timer3 = setTimeout(() => setAnimationStep(3), 2500);
@@ -18,6 +68,10 @@ const WeddingOrderOfService = () => {
       clearTimeout(timer3);
       clearTimeout(timer4);
       clearTimeout(timer5);
+      // Clean up style element
+      if (document.head.contains(style)) {
+        document.head.removeChild(style);
+      }
     };
   }, []);
 
@@ -105,11 +159,11 @@ const WeddingOrderOfService = () => {
                 : "opacity-0 translate-y-10 scale-90"
             }`}
           >
-            <div className="text-3xl font-serif text-white mb-2 bg-gradient-to-r from-yellow-200 via-white to-yellow-200 bg-clip-text text-transparent animate-pulse">
+            <div className="text-4xl font-serif text-white mb-2 bg-gradient-to-r from-yellow-200 via-white to-yellow-200 bg-clip-text text-transparent animate-pulse">
               Jim Hennam Odoi
             </div>
-            <div className="text-2xl text-yellow-200 mb-2 font-light">&</div>
-            <div className="text-3xl font-serif text-white mb-8 bg-gradient-to-r from-yellow-200 via-white to-yellow-200 bg-clip-text text-transparent animate-pulse">
+            <div className="text-3xl text-yellow-200 mb-2 font-light">&</div>
+            <div className="text-4xl font-serif text-white mb-8 bg-gradient-to-r from-yellow-200 via-white to-yellow-200 bg-clip-text text-transparent animate-pulse">
               Mem Adabea Anah
             </div>
           </div>
@@ -504,53 +558,3 @@ const WeddingOrderOfService = () => {
 };
 
 export default WeddingOrderOfService;
-
-// Add custom animations
-const style = document.createElement("style");
-style.textContent = `
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-  
-  @keyframes slideDown {
-    from { opacity: 0; transform: translateY(-30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  
-  @keyframes slideLeft {
-    from { opacity: 0; transform: translateX(-50px); }
-    to { opacity: 1; transform: translateX(0); }
-  }
-  
-  @keyframes slideRight {
-    from { opacity: 0; transform: translateX(50px); }
-    to { opacity: 1; transform: translateX(0); }
-  }
-  
-  @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  
-  .animate-fadeIn {
-    animation: fadeIn 1s ease-out;
-  }
-  
-  .animate-slideDown {
-    animation: slideDown 1s ease-out 0.2s both;
-  }
-  
-  .animate-slideLeft {
-    animation: slideLeft 1s ease-out 0.4s both;
-  }
-  
-  .animate-slideRight {
-    animation: slideRight 1s ease-out 0.6s both;
-  }
-  
-  .animate-fadeInUp {
-    animation: fadeInUp 1s ease-out 0.8s both;
-  }
-`;
-document.head.appendChild(style);
