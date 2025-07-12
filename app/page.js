@@ -228,125 +228,125 @@ const WeddingOrderOfService = () => {
 
               <div className="space-y-6">
                 <div className="flex justify-between items-center border-b border-white/20 pb-3">
-                  <span className="text-sm font-medium">
+                  <span className="text-[10px] font-medium">
                     1. Arrival of Guests
                   </span>
                 </div>
 
                 <div className="flex justify-between items-center border-b border-white/20 pb-3">
-                  <span className="text-sm font-medium">
+                  <span className="text-[10px] font-medium">
                     2. Opening Prayer - Bro. Wisdom Amet
                   </span>
                   <span className="text-xs opacity-70">12:00pm - 12:03pm</span>
                 </div>
 
                 <div className="flex justify-between items-center border-b border-white/20 pb-3">
-                  <span className="text-sm font-medium">
+                  <span className="text-[10px] font-medium">
                     3. Praise and Worship - Team Manuel
                   </span>
                   <span className="text-xs opacity-70">12:03pm - 12:18pm</span>
                 </div>
 
                 <div className="flex justify-between items-center border-b border-white/20 pb-3">
-                  <span className="text-sm font-medium">
+                  <span className="text-[10px] font-medium">
                     4. Arrival of Bridal Party - Audio
                   </span>
                   <span className="text-xs opacity-70">12:18pm - 12:23pm</span>
                 </div>
 
                 <div className="flex justify-between items-center border-b border-white/20 pb-3">
-                  <span className="text-sm font-medium">
+                  <span className="text-[10px] font-medium">
                     5. Declaration of Purpose - Mrs Patricia Tengey
                   </span>
                   <span className="text-xs opacity-70">12:23pm - 12:25pm</span>
                 </div>
 
                 <div className="flex justify-between items-center border-b border-white/20 pb-3">
-                  <span className="text-sm font-medium">
+                  <span className="text-[10px] font-medium">
                     6. Song Ministration - Team Manuel
                   </span>
                   <span className="text-xs opacity-70">12:25pm - 12:30pm</span>
                 </div>
 
                 <div className="flex justify-between items-center border-b border-white/20 pb-3">
-                  <span className="text-sm font-medium">
+                  <span className="text-[10px] font-medium">
                     7. Sermon - Aps. Prof. Asuming-Brempong
                   </span>
                   <span className="text-xs opacity-70">12:30pm - 12:50pm</span>
                 </div>
 
                 <div className="flex justify-between items-center border-b border-white/20 pb-3">
-                  <span className="text-sm font-medium">
+                  <span className="text-[10px] font-medium">
                     8. First Offertory (For Church) Mc
                   </span>
                   <span className="text-xs opacity-70">12:50pm - 12:55pm</span>
                 </div>
 
                 <div className="flex justify-between items-center border-b border-white/20 pb-3">
-                  <span className="text-sm font-medium">
+                  <span className="text-[10px] font-medium">
                     9. Exchange of Vows - Aps. Dr. K.E Hogan
                   </span>
                   <span className="text-xs opacity-70">12:55pm - 1:15pm</span>
                 </div>
 
                 <div className="flex justify-between items-center border-b border-white/20 pb-3">
-                  <span className="text-sm font-medium">
+                  <span className="text-[10px] font-medium">
                     10. Prayer for Couple - Aps R.K Adanu
                   </span>
                   <span className="text-xs opacity-70">1:15pm - 1:20pm</span>
                 </div>
 
                 <div className="flex justify-between items-center border-b border-white/20 pb-3">
-                  <span className="text-sm font-medium">
+                  <span className="text-[10px] font-medium">
                     11. Signing of Certificate - Parents
                   </span>
                   <span className="text-xs opacity-70">1:20pm - 1:25pm</span>
                 </div>
 
                 <div className="flex justify-between items-center border-b border-white/20 pb-3">
-                  <span className="text-sm font-medium">
+                  <span className="text-[10px] font-medium">
                     12. Second Offertory (For Couple) Mc
                   </span>
                   <span className="text-xs opacity-70">1:25pm - 1:30pm</span>
                 </div>
 
                 <div className="flex justify-between items-center border-b border-white/20 pb-3">
-                  <span className="text-sm font-medium">
+                  <span className="text-[10px] font-medium">
                     13. Presentation of Marriage Certificate - Mama Doris Adanu
                   </span>
                   <span className="text-xs opacity-70">1:35pm - 1:40pm</span>
                 </div>
 
                 <div className="flex justify-between items-center border-b border-white/20 pb-3">
-                  <span className="text-sm font-medium">
+                  <span className="text-[10px] font-medium">
                     14. Champagne Pop/Toast
                   </span>
                   <span className="text-xs opacity-70">1:40pm - 1:45pm</span>
                 </div>
 
                 <div className="flex justify-between items-center border-b border-white/20 pb-3">
-                  <span className="text-sm font-medium">
+                  <span className="text-[10px] font-medium">
                     15. Cutting of Cake - Mrs. Paulina Ansah
                   </span>
                   <span className="text-xs opacity-70">1:45pm - 1:50pm</span>
                 </div>
 
                 <div className="flex justify-between items-center border-b border-white/20 pb-3">
-                  <span className="text-sm font-medium">
+                  <span className="text-[10px] font-medium">
                     16. Announcements - Mc
                   </span>
                   <span className="text-xs opacity-70">1:50pm - 1:55pm</span>
                 </div>
 
                 <div className="flex justify-between items-center border-b border-white/20 pb-3">
-                  <span className="text-sm font-medium">
+                  <span className="text-[10px] font-medium">
                     17. Thanksgiving & Appreciation - Mr. Emmanuel Tsormey
                   </span>
                   <span className="text-xs opacity-70">1:55pm - 2:00pm</span>
                 </div>
 
                 <div className="flex justify-between items-center">
-                  <span className="text-sm font-medium">
+                  <span className="text-[10px] font-medium">
                     18. Blessing/Benediction - Aps. Dr. S.V. Ansah
                   </span>
                 </div>
@@ -365,7 +365,7 @@ const WeddingOrderOfService = () => {
                 <div className="text-lg font-medium">Time: 2pm</div>
               </div>
 
-              <div className="space-y-3 text-sm">
+              <div className="space-y-3 text-[10px]">
                 <div className="flex items-center">
                   <span className="w-6 h-6 bg-yellow-200 text-purple-900 rounded-full flex items-center justify-center text-xs font-bold mr-3">
                     1
@@ -513,7 +513,7 @@ const WeddingOrderOfService = () => {
                 Officiating Ministers
               </h2>
 
-              <div className="space-y-3 text-sm">
+              <div className="space-y-3 text-[10px]">
                 <div className="text-center font-medium">
                   Aps. Dr. K.E. Hagan
                 </div>
@@ -536,7 +536,7 @@ const WeddingOrderOfService = () => {
                 Counsellors
               </h2>
 
-              <div className="space-y-3 text-sm">
+              <div className="space-y-3 text-[10px]">
                 <div className="text-center font-medium">
                   Aps. Dr. K.E. Hagan
                 </div>
