@@ -1,560 +1,1068 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
-const WeddingOrderOfService = () => {
-  const [showWelcome, setShowWelcome] = useState(true);
-  const [animationStep, setAnimationStep] = useState(0);
+const slides = [
+  "hero",
+  "comparison",
+  "breakdown",
+  "process",
+  "qualitative",
+  "context",
+];
 
-  useEffect(() => {
-    // Add custom animations styles only on client side
-    const style = document.createElement("style");
-    style.textContent = `
-      @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-      }
-      
-      @keyframes slideDown {
-        from { opacity: 0; transform: translateY(-30px); }
-        to { opacity: 1; transform: translateY(0); }
-      }
-      
-      @keyframes slideLeft {
-        from { opacity: 0; transform: translateX(-50px); }
-        to { opacity: 1; transform: translateX(0); }
-      }
-      
-      @keyframes slideRight {
-        from { opacity: 0; transform: translateX(50px); }
-        to { opacity: 1; transform: translateX(0); }
-      }
-      
-      @keyframes fadeInUp {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-      }
-      
-      .animate-fadeIn {
-        animation: fadeIn 1s ease-out;
-      }
-      
-      .animate-slideDown {
-        animation: slideDown 1s ease-out 0.2s both;
-      }
-      
-      .animate-slideLeft {
-        animation: slideLeft 1s ease-out 0.4s both;
-      }
-      
-      .animate-slideRight {
-        animation: slideRight 1s ease-out 0.6s both;
-      }
-      
-      .animate-fadeInUp {
-        animation: fadeInUp 1s ease-out 0.8s both;
-      }
-    `;
-    document.head.appendChild(style);
+export default function CaseStudyCarousel() {
+  const [currentSlide, setCurrentSlide] = useState(0);
 
-    const timer1 = setTimeout(() => setAnimationStep(1), 500);
-    const timer2 = setTimeout(() => setAnimationStep(2), 1500);
-    const timer3 = setTimeout(() => setAnimationStep(3), 2500);
-    const timer4 = setTimeout(() => setAnimationStep(4), 3500);
-    const timer5 = setTimeout(() => setShowWelcome(false), 4500);
+  const baseStyles = {
+    fontFamily:
+      "'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif",
+    backgroundColor: "#FAFAFA",
+    minHeight: "100vh",
+    padding: "24px",
+  };
 
-    return () => {
-      clearTimeout(timer1);
-      clearTimeout(timer2);
-      clearTimeout(timer3);
-      clearTimeout(timer4);
-      clearTimeout(timer5);
-      // Clean up style element
-      if (document.head.contains(style)) {
-        document.head.removeChild(style);
-      }
-    };
-  }, []);
+  const cardStyles = {
+    width: "1080px",
+    height: "1080px",
+    backgroundColor: "#FFFFFF",
+    borderRadius: "0",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    position: "relative",
+    boxShadow: "0 1px 3px rgba(0,0,0,0.08)",
+    overflow: "hidden",
+  };
 
-  if (showWelcome) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-purple-800 to-purple-900 flex items-center justify-center relative overflow-hidden">
-        {/* Animated background elements */}
-        <div className="absolute inset-0">
-          {/* Floating petals */}
-          {[...Array(20)].map((_, i) => (
-            <div
-              key={i}
-              className={`absolute w-4 h-4 bg-gradient-to-br from-yellow-200 to-yellow-300 rounded-full opacity-70 transition-all duration-[4000ms] ${
-                animationStep >= 1 ? "animate-pulse" : ""
-              }`}
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 2}s`,
-                transform:
-                  animationStep >= 1
-                    ? `translateY(-${Math.random() * 100}px) rotate(${
-                        Math.random() * 360
-                      }deg)`
-                    : "translateY(0) rotate(0)",
-              }}
-            />
-          ))}
+  const accentColor = "#0A0A0A";
+  const mutedColor = "#71717A";
+  const lightGray = "#E4E4E7";
+  const brandGreen = "#10B981";
 
-          {/* Sparkle effects */}
-          {[...Array(15)].map((_, i) => (
-            <div
-              key={`star-${i}`}
-              className={`absolute text-yellow-200 transition-all duration-1000 ${
-                animationStep >= 2
-                  ? "opacity-100 scale-100"
-                  : "opacity-0 scale-0"
-              }`}
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                fontSize: `${Math.random() * 20 + 10}px`,
-                animationDelay: `${Math.random() * 1}s`,
-              }}
-            >
-              ✨
-            </div>
-          ))}
-        </div>
-
-        {/* Welcome content */}
-        <div className="text-center z-10 relative">
-          {/* Hearts animation */}
-          <div
-            className={`text-8xl mb-8 transition-all duration-1000 ${
-              animationStep >= 1
-                ? "opacity-100 scale-100 rotate-0"
-                : "opacity-0 scale-0 rotate-180"
-            }`}
-          >
-            <span className="text-red-400 animate-pulse">💕</span>
-          </div>
-
-          {/* Welcome text */}
-          <div
-            className={`transition-all duration-1000 delay-500 ${
-              animationStep >= 2
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-10"
-            }`}
-          >
-            <h1 className="text-6xl font-serif text-white mb-4 bg-gradient-to-r from-yellow-200 to-white bg-clip-text text-transparent">
-              Welcome
-            </h1>
-            <p className="text-2xl text-yellow-100 mb-8 font-light">
-              to the Wedding Celebration of
-            </p>
-          </div>
-
-          {/* Couple names with special animation */}
-          <div
-            className={`transition-all duration-1000 delay-1000 ${
-              animationStep >= 3
-                ? "opacity-100 translate-y-0 scale-100"
-                : "opacity-0 translate-y-10 scale-90"
-            }`}
-          >
-            <div className="text-4xl font-serif text-white mb-2 bg-gradient-to-r from-yellow-200 via-white to-yellow-200 bg-clip-text text-transparent animate-pulse">
-              Jim Hennam Odoi
-            </div>
-            <div className="text-3xl text-yellow-200 mb-2 font-light">&</div>
-            <div className="text-4xl font-serif text-white mb-8 bg-gradient-to-r from-yellow-200 via-white to-yellow-200 bg-clip-text text-transparent animate-pulse">
-              Mem Adabea Anah
-            </div>
-          </div>
-
-          {/* Date and final message */}
-          <div
-            className={`transition-all duration-1000 delay-1500 ${
-              animationStep >= 4
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-10"
-            }`}
-          >
-            <div className="text-xl text-yellow-100 mb-4">
-              Saturday, 12th July 2025
-            </div>
-            <div className="text-lg text-white opacity-80">
-              Preparing your order of service...
-            </div>
-
-            {/* Loading animation */}
-            <div className="mt-8 flex justify-center">
-              <div className="flex space-x-1">
-                {[...Array(3)].map((_, i) => (
-                  <div
-                    key={i}
-                    className="w-3 h-3 bg-yellow-200 rounded-full animate-bounce"
-                    style={{ animationDelay: `${i * 0.2}s` }}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Radial gradient overlay for dramatic effect */}
-        <div className="absolute inset-0 bg-gradient-radial from-transparent via-purple-900/20 to-purple-900/60 pointer-events-none" />
+  // Slide 1: Hero Stat
+  const HeroSlide = () => (
+    <div style={cardStyles}>
+      <div
+        style={{
+          position: "absolute",
+          top: "60px",
+          left: "60px",
+          display: "flex",
+          alignItems: "center",
+          gap: "12px",
+        }}
+      >
+        <div
+          style={{
+            width: "32px",
+            height: "32px",
+            backgroundColor: brandGreen,
+            borderRadius: "6px",
+          }}
+        />
+        <span
+          style={{
+            fontSize: "18px",
+            fontWeight: "600",
+            color: accentColor,
+            letterSpacing: "-0.02em",
+          }}
+        >
+          GradeInstant
+        </span>
       </div>
-    );
-  }
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-purple-800 to-purple-900 text-white">
-      <div className="max-w-6xl mx-auto px-8 py-12">
-        {/* Header */}
-        <div className="text-center mb-12 animate-slideDown">
-          <h1 className="text-3xl font-serif mb-4 bg-gradient-to-r from-yellow-200 to-white bg-clip-text text-transparent">
-            Jim Hennam Odoi & Mem Adabea Anah Wedding
-          </h1>
-          <div className="text-lg opacity-90 mb-4">Order of Service</div>
-          <div className="text-base opacity-80">Saturday | 12 July | 2025</div>
-          <div className="text-base opacity-80">
-            MC: Miss Esther Asuming-Brempong
-          </div>
+
+      <div style={{ textAlign: "center", padding: "0 80px" }}>
+        <p
+          style={{
+            fontSize: "16px",
+            fontWeight: "500",
+            color: mutedColor,
+            letterSpacing: "0.1em",
+            textTransform: "uppercase",
+            marginBottom: "32px",
+          }}
+        >
+          Case Study Results
+        </p>
+
+        <h1
+          style={{
+            fontSize: "240px",
+            fontWeight: "700",
+            color: accentColor,
+            lineHeight: "0.9",
+            letterSpacing: "-0.04em",
+            margin: "0",
+          }}
+        >
+          95.8<span style={{ fontSize: "120px" }}>%</span>
+        </h1>
+
+        <p
+          style={{
+            fontSize: "32px",
+            fontWeight: "400",
+            color: accentColor,
+            marginTop: "40px",
+            letterSpacing: "-0.02em",
+          }}
+        >
+          reduction in grading time
+        </p>
+
+        <div
+          style={{
+            marginTop: "80px",
+            display: "flex",
+            gap: "32px",
+            justifyContent: "center",
+          }}
+        >
+          <span
+            style={{
+              fontSize: "15px",
+              color: mutedColor,
+              padding: "8px 16px",
+              backgroundColor: "#F4F4F5",
+              borderRadius: "4px",
+            }}
+          >
+            50 Python assignments
+          </span>
+          <span
+            style={{
+              fontSize: "15px",
+              color: mutedColor,
+              padding: "8px 16px",
+              backgroundColor: "#F4F4F5",
+              borderRadius: "4px",
+            }}
+          >
+            CS101 Study
+          </span>
         </div>
+      </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Left Column - Order of Service */}
-          <div className="space-y-8 animate-slideLeft">
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-white/20 hover:bg-white/15 transition-all duration-300">
-              <h2 className="text-3xl font-serif mb-8 text-center bg-gradient-to-r from-yellow-200 to-white bg-clip-text text-transparent">
-                Order of Service
-              </h2>
-
-              <div className="space-y-6">
-                <div className="flex justify-between items-center border-b border-white/20 pb-3">
-                  <span className="text-[10px] font-medium">
-                    1. Arrival of Guests
-                  </span>
-                </div>
-
-                <div className="flex justify-between items-center border-b border-white/20 pb-3">
-                  <span className="text-[10px] font-medium">
-                    2. Opening Prayer - Bro. Wisdom Amet
-                  </span>
-                  <span className="text-xs opacity-70">12:00pm - 12:03pm</span>
-                </div>
-
-                <div className="flex justify-between items-center border-b border-white/20 pb-3">
-                  <span className="text-[10px] font-medium">
-                    3. Praise and Worship - Team Manuel
-                  </span>
-                  <span className="text-xs opacity-70">12:03pm - 12:18pm</span>
-                </div>
-
-                <div className="flex justify-between items-center border-b border-white/20 pb-3">
-                  <span className="text-[10px] font-medium">
-                    4. Arrival of Bridal Party - Audio
-                  </span>
-                  <span className="text-xs opacity-70">12:18pm - 12:23pm</span>
-                </div>
-
-                <div className="flex justify-between items-center border-b border-white/20 pb-3">
-                  <span className="text-[10px] font-medium">
-                    5. Declaration of Purpose - Mrs Patricia Tengey
-                  </span>
-                  <span className="text-xs opacity-70">12:23pm - 12:25pm</span>
-                </div>
-
-                <div className="flex justify-between items-center border-b border-white/20 pb-3">
-                  <span className="text-[10px] font-medium">
-                    6. Song Ministration - Team Manuel
-                  </span>
-                  <span className="text-xs opacity-70">12:25pm - 12:30pm</span>
-                </div>
-
-                <div className="flex justify-between items-center border-b border-white/20 pb-3">
-                  <span className="text-[10px] font-medium">
-                    7. Sermon - Aps. Prof. Asuming-Brempong
-                  </span>
-                  <span className="text-xs opacity-70">12:30pm - 12:50pm</span>
-                </div>
-
-                <div className="flex justify-between items-center border-b border-white/20 pb-3">
-                  <span className="text-[10px] font-medium">
-                    8. First Offertory (For Church) Mc
-                  </span>
-                  <span className="text-xs opacity-70">12:50pm - 12:55pm</span>
-                </div>
-
-                <div className="flex justify-between items-center border-b border-white/20 pb-3">
-                  <span className="text-[10px] font-medium">
-                    9. Exchange of Vows - Aps. Dr. K.E Hogan
-                  </span>
-                  <span className="text-xs opacity-70">12:55pm - 1:15pm</span>
-                </div>
-
-                <div className="flex justify-between items-center border-b border-white/20 pb-3">
-                  <span className="text-[10px] font-medium">
-                    10. Prayer for Couple - Aps R.K Adanu
-                  </span>
-                  <span className="text-xs opacity-70">1:15pm - 1:20pm</span>
-                </div>
-
-                <div className="flex justify-between items-center border-b border-white/20 pb-3">
-                  <span className="text-[10px] font-medium">
-                    11. Signing of Certificate - Parents
-                  </span>
-                  <span className="text-xs opacity-70">1:20pm - 1:25pm</span>
-                </div>
-
-                <div className="flex justify-between items-center border-b border-white/20 pb-3">
-                  <span className="text-[10px] font-medium">
-                    12. Second Offertory (For Couple) Mc
-                  </span>
-                  <span className="text-xs opacity-70">1:25pm - 1:30pm</span>
-                </div>
-
-                <div className="flex justify-between items-center border-b border-white/20 pb-3">
-                  <span className="text-[10px] font-medium">
-                    13. Presentation of Marriage Certificate - Mama Doris Adanu
-                  </span>
-                  <span className="text-xs opacity-70">1:35pm - 1:40pm</span>
-                </div>
-
-                <div className="flex justify-between items-center border-b border-white/20 pb-3">
-                  <span className="text-[10px] font-medium">
-                    14. Champagne Pop/Toast
-                  </span>
-                  <span className="text-xs opacity-70">1:40pm - 1:45pm</span>
-                </div>
-
-                <div className="flex justify-between items-center border-b border-white/20 pb-3">
-                  <span className="text-[10px] font-medium">
-                    15. Cutting of Cake - Mrs. Paulina Ansah
-                  </span>
-                  <span className="text-xs opacity-70">1:45pm - 1:50pm</span>
-                </div>
-
-                <div className="flex justify-between items-center border-b border-white/20 pb-3">
-                  <span className="text-[10px] font-medium">
-                    16. Announcements - Mc
-                  </span>
-                  <span className="text-xs opacity-70">1:50pm - 1:55pm</span>
-                </div>
-
-                <div className="flex justify-between items-center border-b border-white/20 pb-3">
-                  <span className="text-[10px] font-medium">
-                    17. Thanksgiving & Appreciation - Mr. Emmanuel Tsormey
-                  </span>
-                  <span className="text-xs opacity-70">1:55pm - 2:00pm</span>
-                </div>
-
-                <div className="flex justify-between items-center">
-                  <span className="text-[10px] font-medium">
-                    18. Blessing/Benediction - Aps. Dr. S.V. Ansah
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Column - Photography Order & Officials */}
-          <div className="space-y-8 animate-slideRight">
-            {/* Photography Order */}
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-white/20 hover:bg-white/15 transition-all duration-300">
-              <h2 className="text-2xl font-serif mb-6 text-center bg-gradient-to-r from-yellow-200 to-white bg-clip-text text-transparent">
-                Photography Order
-              </h2>
-              <div className="text-center mb-6">
-                <div className="text-lg font-medium">Time: 2pm</div>
-              </div>
-
-              <div className="space-y-3 text-[10px]">
-                <div className="flex items-center">
-                  <span className="w-6 h-6 bg-yellow-200 text-purple-900 rounded-full flex items-center justify-center text-xs font-bold mr-3">
-                    1
-                  </span>
-                  <span>Officiating ministers with the couple</span>
-                </div>
-                <div className="flex items-center">
-                  <span className="w-6 h-6 bg-yellow-200 text-purple-900 rounded-full flex items-center justify-center text-xs font-bold mr-3">
-                    2
-                  </span>
-                  <span>Counsellors with the couple</span>
-                </div>
-                <div className="flex items-center">
-                  <span className="w-6 h-6 bg-yellow-200 text-purple-900 rounded-full flex items-center justify-center text-xs font-bold mr-3">
-                    3
-                  </span>
-                  <span>Ministers with couple</span>
-                </div>
-                <div className="flex items-center">
-                  <span className="w-6 h-6 bg-yellow-200 text-purple-900 rounded-full flex items-center justify-center text-xs font-bold mr-3">
-                    4
-                  </span>
-                  <span>Parents of the Bride with couple</span>
-                </div>
-                <div className="flex items-center">
-                  <span className="w-6 h-6 bg-yellow-200 text-purple-900 rounded-full flex items-center justify-center text-xs font-bold mr-3">
-                    5
-                  </span>
-                  <span>Parents of the Groom with couple</span>
-                </div>
-                <div className="flex items-center">
-                  <span className="w-6 h-6 bg-yellow-200 text-purple-900 rounded-full flex items-center justify-center text-xs font-bold mr-3">
-                    6
-                  </span>
-                  <span>Family of the Groom with couple</span>
-                </div>
-                <div className="flex items-center">
-                  <span className="w-6 h-6 bg-yellow-200 text-purple-900 rounded-full flex items-center justify-center text-xs font-bold mr-3">
-                    7
-                  </span>
-                  <span>Family of the Bride with couple</span>
-                </div>
-                <div className="flex items-center">
-                  <span className="w-6 h-6 bg-yellow-200 text-purple-900 rounded-full flex items-center justify-center text-xs font-bold mr-3">
-                    8
-                  </span>
-                  <span>Family of Groom and Bride</span>
-                </div>
-                <div className="flex items-center">
-                  <span className="w-6 h-6 bg-yellow-200 text-purple-900 rounded-full flex items-center justify-center text-xs font-bold mr-3">
-                    9
-                  </span>
-                  <span>Groom's Men & Bridal Team with couple</span>
-                </div>
-                <div className="flex items-center">
-                  <span className="w-6 h-6 bg-yellow-200 text-purple-900 rounded-full flex items-center justify-center text-xs font-bold mr-3">
-                    10
-                  </span>
-                  <span>Protocol Team with couple</span>
-                </div>
-                <div className="flex items-center">
-                  <span className="w-6 h-6 bg-yellow-200 text-purple-900 rounded-full flex items-center justify-center text-xs font-bold mr-3">
-                    11
-                  </span>
-                  <span>NAVAC Executives</span>
-                </div>
-                <div className="flex items-center">
-                  <span className="w-6 h-6 bg-yellow-200 text-purple-900 rounded-full flex items-center justify-center text-xs font-bold mr-3">
-                    12
-                  </span>
-                  <span>NACHEC</span>
-                </div>
-                <div className="flex items-center">
-                  <span className="w-6 h-6 bg-yellow-200 text-purple-900 rounded-full flex items-center justify-center text-xs font-bold mr-3">
-                    13
-                  </span>
-                  <span>Bride Assembly</span>
-                </div>
-                <div className="flex items-center">
-                  <span className="w-6 h-6 bg-yellow-200 text-purple-900 rounded-full flex items-center justify-center text-xs font-bold mr-3">
-                    14
-                  </span>
-                  <span>Triumphant Temple</span>
-                </div>
-                <div className="flex items-center">
-                  <span className="w-6 h-6 bg-yellow-200 text-purple-900 rounded-full flex items-center justify-center text-xs font-bold mr-3">
-                    15
-                  </span>
-                  <span>GCCI</span>
-                </div>
-                <div className="flex items-center">
-                  <span className="w-6 h-6 bg-yellow-200 text-purple-900 rounded-full flex items-center justify-center text-xs font-bold mr-3">
-                    16
-                  </span>
-                  <span>Friends of the Groom</span>
-                </div>
-                <div className="flex items-center">
-                  <span className="w-6 h-6 bg-yellow-200 text-purple-900 rounded-full flex items-center justify-center text-xs font-bold mr-3">
-                    17
-                  </span>
-                  <span>Friends of the Bride</span>
-                </div>
-                <div className="flex items-center">
-                  <span className="w-6 h-6 bg-yellow-200 text-purple-900 rounded-full flex items-center justify-center text-xs font-bold mr-3">
-                    18
-                  </span>
-                  <span>Staff of J.G. Knol Technical Institute</span>
-                </div>
-                <div className="flex items-center">
-                  <span className="w-6 h-6 bg-yellow-200 text-purple-900 rounded-full flex items-center justify-center text-xs font-bold mr-3">
-                    19
-                  </span>
-                  <span>Staff of Sparkling Stars International</span>
-                </div>
-                <div className="flex items-center">
-                  <span className="w-6 h-6 bg-yellow-200 text-purple-900 rounded-full flex items-center justify-center text-xs font-bold mr-3">
-                    20
-                  </span>
-                  <span>HTU Alumni</span>
-                </div>
-                <div className="flex items-center">
-                  <span className="w-6 h-6 bg-yellow-200 text-purple-900 rounded-full flex items-center justify-center text-xs font-bold mr-3">
-                    21
-                  </span>
-                  <span>Kpesec old students</span>
-                </div>
-                <div className="flex items-center">
-                  <span className="w-6 h-6 bg-yellow-200 text-purple-900 rounded-full flex items-center justify-center text-xs font-bold mr-3">
-                    22
-                  </span>
-                  <span>University of Ghana Alumni</span>
-                </div>
-                <div className="flex items-center">
-                  <span className="w-6 h-6 bg-yellow-200 text-purple-900 rounded-full flex items-center justify-center text-xs font-bold mr-3">
-                    23
-                  </span>
-                  <span>Krobo Girls Alumni</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Officials */}
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-white/20 hover:bg-white/15 transition-all duration-300">
-              <h2 className="text-2xl font-serif mb-6 text-center bg-gradient-to-r from-yellow-200 to-white bg-clip-text text-transparent">
-                Officiating Ministers
-              </h2>
-
-              <div className="space-y-3 text-[10px]">
-                <div className="text-center font-medium">
-                  Aps. Dr. K.E. Hagan
-                </div>
-                <div className="text-center font-medium">
-                  Aps. Prof. Asumeng Brempong
-                </div>
-                <div className="text-center font-medium">Aps. R.K. Adanu</div>
-                <div className="text-center font-medium">
-                  Aps. Dr. S.V. Ansah
-                </div>
-                <div className="text-center font-medium">
-                  Rev. Benson Ankody
-                </div>
-              </div>
-            </div>
-
-            {/* Counsellors */}
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-white/20 hover:bg-white/15 transition-all duration-300">
-              <h2 className="text-2xl font-serif mb-6 text-center bg-gradient-to-r from-yellow-200 to-white bg-clip-text text-transparent">
-                Counsellors
-              </h2>
-
-              <div className="space-y-3 text-[10px]">
-                <div className="text-center font-medium">
-                  Aps. Dr. K.E. Hagan
-                </div>
-                <div className="text-center font-medium">
-                  Rev. Benson Ankody
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Footer */}
-        <div className="text-center mt-12 text-lg font-serif bg-gradient-to-r from-yellow-200 to-white bg-clip-text text-transparent animate-fadeInUp">
-          GOD BLESS YOU
-        </div>
+      <div
+        style={{
+          position: "absolute",
+          bottom: "60px",
+          right: "60px",
+          fontSize: "14px",
+          color: mutedColor,
+        }}
+      >
+        1 / 6
       </div>
     </div>
   );
-};
 
-export default WeddingOrderOfService;
+  // Slide 2: Before/After Comparison
+  const ComparisonSlide = () => (
+    <div style={cardStyles}>
+      <div
+        style={{
+          position: "absolute",
+          top: "60px",
+          left: "60px",
+          display: "flex",
+          alignItems: "center",
+          gap: "12px",
+        }}
+      >
+        <div
+          style={{
+            width: "32px",
+            height: "32px",
+            backgroundColor: brandGreen,
+            borderRadius: "6px",
+          }}
+        />
+        <span
+          style={{
+            fontSize: "18px",
+            fontWeight: "600",
+            color: accentColor,
+            letterSpacing: "-0.02em",
+          }}
+        >
+          GradeInstant
+        </span>
+      </div>
+
+      <div style={{ width: "100%", padding: "0 80px" }}>
+        <p
+          style={{
+            fontSize: "16px",
+            fontWeight: "500",
+            color: mutedColor,
+            letterSpacing: "0.1em",
+            textTransform: "uppercase",
+            marginBottom: "60px",
+          }}
+        >
+          Time Comparison
+        </p>
+
+        {/* Manual Bar */}
+        <div style={{ marginBottom: "48px" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "baseline",
+              marginBottom: "16px",
+            }}
+          >
+            <span
+              style={{
+                fontSize: "20px",
+                fontWeight: "500",
+                color: accentColor,
+              }}
+            >
+              Manual Grading
+            </span>
+            <span
+              style={{
+                fontSize: "48px",
+                fontWeight: "700",
+                color: accentColor,
+                letterSpacing: "-0.03em",
+              }}
+            >
+              7h 55m
+            </span>
+          </div>
+          <div
+            style={{
+              width: "100%",
+              height: "64px",
+              backgroundColor: "#D4D4D8",
+              borderRadius: "4px",
+            }}
+          />
+        </div>
+
+        {/* GradeInstant Bar */}
+        <div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "baseline",
+              marginBottom: "16px",
+            }}
+          >
+            <span
+              style={{
+                fontSize: "20px",
+                fontWeight: "500",
+                color: accentColor,
+              }}
+            >
+              With GradeInstant
+            </span>
+            <span
+              style={{
+                fontSize: "48px",
+                fontWeight: "700",
+                color: brandGreen,
+                letterSpacing: "-0.03em",
+              }}
+            >
+              20m
+            </span>
+          </div>
+          <div
+            style={{
+              width: "4.2%",
+              height: "64px",
+              backgroundColor: brandGreen,
+              borderRadius: "4px",
+            }}
+          />
+        </div>
+
+        <div
+          style={{
+            marginTop: "80px",
+            padding: "32px",
+            backgroundColor: "#F4F4F5",
+            borderRadius: "8px",
+            textAlign: "center",
+          }}
+        >
+          <span
+            style={{
+              fontSize: "18px",
+              color: mutedColor,
+            }}
+          >
+            Time saved per batch:{" "}
+            <strong style={{ color: accentColor }}>7 hours 35 minutes</strong>
+          </span>
+        </div>
+      </div>
+
+      <div
+        style={{
+          position: "absolute",
+          bottom: "60px",
+          right: "60px",
+          fontSize: "14px",
+          color: mutedColor,
+        }}
+      >
+        2 / 6
+      </div>
+    </div>
+  );
+
+  // Slide 3: Time Breakdown
+  const BreakdownSlide = () => {
+    const tasks = [
+      { name: "Code Review & Execution", time: 3, width: "31.6%" },
+      { name: "Logic & Style Evaluation", time: 2, width: "21%" },
+      { name: "AI/Plagiarism Check", time: 1.5, width: "15.8%" },
+      { name: "Writing Feedback", time: 2.5, width: "26.3%" },
+      { name: "LMS Grade Entry", time: 0.5, width: "5.3%" },
+    ];
+
+    const colors = ["#18181B", "#3F3F46", "#52525B", "#71717A", "#A1A1AA"];
+
+    return (
+      <div style={cardStyles}>
+        <div
+          style={{
+            position: "absolute",
+            top: "60px",
+            left: "60px",
+            display: "flex",
+            alignItems: "center",
+            gap: "12px",
+          }}
+        >
+          <div
+            style={{
+              width: "32px",
+              height: "32px",
+              backgroundColor: brandGreen,
+              borderRadius: "6px",
+            }}
+          />
+          <span
+            style={{
+              fontSize: "18px",
+              fontWeight: "600",
+              color: accentColor,
+              letterSpacing: "-0.02em",
+            }}
+          >
+            GradeInstant
+          </span>
+        </div>
+
+        <div style={{ width: "100%", padding: "0 80px" }}>
+          <p
+            style={{
+              fontSize: "16px",
+              fontWeight: "500",
+              color: mutedColor,
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              marginBottom: "24px",
+            }}
+          >
+            Where Manual Grading Time Goes
+          </p>
+
+          <p
+            style={{
+              fontSize: "24px",
+              color: accentColor,
+              marginBottom: "60px",
+              fontWeight: "400",
+            }}
+          >
+            Average <strong>9.5 minutes</strong> per assignment
+          </p>
+
+          {/* Stacked bar */}
+          <div
+            style={{
+              display: "flex",
+              height: "80px",
+              borderRadius: "8px",
+              overflow: "hidden",
+              marginBottom: "48px",
+            }}
+          >
+            {tasks.map((task, i) => (
+              <div
+                key={i}
+                style={{
+                  width: task.width,
+                  backgroundColor: colors[i],
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <span
+                  style={{
+                    color: "#FFF",
+                    fontSize: "16px",
+                    fontWeight: "600",
+                  }}
+                >
+                  {task.time}m
+                </span>
+              </div>
+            ))}
+          </div>
+
+          {/* Legend */}
+          <div
+            style={{ display: "flex", flexDirection: "column", gap: "20px" }}
+          >
+            {tasks.map((task, i) => (
+              <div
+                key={i}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                }}
+              >
+                <div
+                  style={{ display: "flex", alignItems: "center", gap: "16px" }}
+                >
+                  <div
+                    style={{
+                      width: "16px",
+                      height: "16px",
+                      backgroundColor: colors[i],
+                      borderRadius: "3px",
+                    }}
+                  />
+                  <span
+                    style={{
+                      fontSize: "18px",
+                      color: accentColor,
+                    }}
+                  >
+                    {task.name}
+                  </span>
+                </div>
+                <span
+                  style={{
+                    fontSize: "18px",
+                    fontWeight: "600",
+                    color: accentColor,
+                  }}
+                >
+                  {task.time} min
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div
+          style={{
+            position: "absolute",
+            bottom: "60px",
+            right: "60px",
+            fontSize: "14px",
+            color: mutedColor,
+          }}
+        >
+          3 / 6
+        </div>
+      </div>
+    );
+  };
+
+  // Slide 4: Process Comparison
+  const ProcessSlide = () => {
+    const manualSteps = [
+      "Open code files & run program",
+      "Verify across test cases",
+      "Review logic & coding style",
+      "Check for AI/plagiarism",
+      "Write individual feedback",
+      "Record grades in LMS",
+    ];
+
+    const autoSteps = [
+      "Upload submissions",
+      "Review flagged outliers",
+      "Export grades",
+    ];
+
+    return (
+      <div style={cardStyles}>
+        <div
+          style={{
+            position: "absolute",
+            top: "60px",
+            left: "60px",
+            display: "flex",
+            alignItems: "center",
+            gap: "12px",
+          }}
+        >
+          <div
+            style={{
+              width: "32px",
+              height: "32px",
+              backgroundColor: brandGreen,
+              borderRadius: "6px",
+            }}
+          />
+          <span
+            style={{
+              fontSize: "18px",
+              fontWeight: "600",
+              color: accentColor,
+              letterSpacing: "-0.02em",
+            }}
+          >
+            GradeInstant
+          </span>
+        </div>
+
+        <div style={{ width: "100%", padding: "0 80px" }}>
+          <p
+            style={{
+              fontSize: "16px",
+              fontWeight: "500",
+              color: mutedColor,
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              marginBottom: "60px",
+            }}
+          >
+            Process Comparison
+          </p>
+
+          <div style={{ display: "flex", gap: "60px" }}>
+            {/* Manual Column */}
+            <div style={{ flex: 1 }}>
+              <h3
+                style={{
+                  fontSize: "24px",
+                  fontWeight: "600",
+                  color: accentColor,
+                  marginBottom: "32px",
+                  paddingBottom: "16px",
+                  borderBottom: `2px solid ${lightGray}`,
+                }}
+              >
+                Manual
+              </h3>
+
+              {manualSteps.map((step, i) => (
+                <div
+                  key={i}
+                  style={{
+                    display: "flex",
+                    alignItems: "flex-start",
+                    gap: "16px",
+                    marginBottom: "24px",
+                  }}
+                >
+                  <span
+                    style={{
+                      width: "28px",
+                      height: "28px",
+                      backgroundColor: "#E4E4E7",
+                      borderRadius: "50%",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontSize: "14px",
+                      fontWeight: "600",
+                      color: mutedColor,
+                      flexShrink: 0,
+                    }}
+                  >
+                    {i + 1}
+                  </span>
+                  <span
+                    style={{
+                      fontSize: "18px",
+                      color: accentColor,
+                      lineHeight: "28px",
+                    }}
+                  >
+                    {step}
+                  </span>
+                </div>
+              ))}
+            </div>
+
+            {/* Divider */}
+            <div
+              style={{
+                width: "1px",
+                backgroundColor: lightGray,
+              }}
+            />
+
+            {/* GradeInstant Column */}
+            <div style={{ flex: 1 }}>
+              <h3
+                style={{
+                  fontSize: "24px",
+                  fontWeight: "600",
+                  color: brandGreen,
+                  marginBottom: "32px",
+                  paddingBottom: "16px",
+                  borderBottom: `2px solid ${brandGreen}`,
+                }}
+              >
+                GradeInstant
+              </h3>
+
+              {autoSteps.map((step, i) => (
+                <div
+                  key={i}
+                  style={{
+                    display: "flex",
+                    alignItems: "flex-start",
+                    gap: "16px",
+                    marginBottom: "24px",
+                  }}
+                >
+                  <span
+                    style={{
+                      width: "28px",
+                      height: "28px",
+                      backgroundColor: brandGreen,
+                      borderRadius: "50%",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontSize: "14px",
+                      fontWeight: "600",
+                      color: "#FFF",
+                      flexShrink: 0,
+                    }}
+                  >
+                    {i + 1}
+                  </span>
+                  <span
+                    style={{
+                      fontSize: "18px",
+                      color: accentColor,
+                      lineHeight: "28px",
+                    }}
+                  >
+                    {step}
+                  </span>
+                </div>
+              ))}
+
+              <div
+                style={{
+                  marginTop: "40px",
+                  padding: "24px",
+                  backgroundColor: "#ECFDF5",
+                  borderRadius: "8px",
+                  borderLeft: `4px solid ${brandGreen}`,
+                }}
+              >
+                <span
+                  style={{
+                    fontSize: "16px",
+                    color: "#065F46",
+                  }}
+                >
+                  6 steps → 3 steps
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          style={{
+            position: "absolute",
+            bottom: "60px",
+            right: "60px",
+            fontSize: "14px",
+            color: mutedColor,
+          }}
+        >
+          4 / 6
+        </div>
+      </div>
+    );
+  };
+
+  // Slide 5: Qualitative Findings
+  const QualitativeSlide = () => {
+    const findings = [
+      "Improved consistency in grading",
+      "Reduced cognitive fatigue",
+      "More accurate detection of students who didn't understand their code",
+      "Higher confidence in academic integrity",
+    ];
+
+    return (
+      <div style={cardStyles}>
+        <div
+          style={{
+            position: "absolute",
+            top: "60px",
+            left: "60px",
+            display: "flex",
+            alignItems: "center",
+            gap: "12px",
+          }}
+        >
+          <div
+            style={{
+              width: "32px",
+              height: "32px",
+              backgroundColor: brandGreen,
+              borderRadius: "6px",
+            }}
+          />
+          <span
+            style={{
+              fontSize: "18px",
+              fontWeight: "600",
+              color: accentColor,
+              letterSpacing: "-0.02em",
+            }}
+          >
+            GradeInstant
+          </span>
+        </div>
+
+        <div style={{ width: "100%", padding: "0 100px" }}>
+          <p
+            style={{
+              fontSize: "16px",
+              fontWeight: "500",
+              color: mutedColor,
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              marginBottom: "60px",
+            }}
+          >
+            Beyond the Numbers
+          </p>
+
+          <p
+            style={{
+              fontSize: "28px",
+              color: accentColor,
+              marginBottom: "60px",
+              lineHeight: "1.5",
+              fontWeight: "400",
+            }}
+          >
+            Instructors reported qualitative improvements that numbers alone
+            don't capture:
+          </p>
+
+          <div
+            style={{ display: "flex", flexDirection: "column", gap: "32px" }}
+          >
+            {findings.map((finding, i) => (
+              <div
+                key={i}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "24px",
+                  padding: "28px 32px",
+                  backgroundColor: "#F4F4F5",
+                  borderRadius: "8px",
+                }}
+              >
+                <div
+                  style={{
+                    width: "8px",
+                    height: "8px",
+                    backgroundColor: brandGreen,
+                    borderRadius: "50%",
+                    flexShrink: 0,
+                  }}
+                />
+                <span
+                  style={{
+                    fontSize: "22px",
+                    color: accentColor,
+                    fontWeight: "400",
+                  }}
+                >
+                  {finding}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div
+          style={{
+            position: "absolute",
+            bottom: "60px",
+            right: "60px",
+            fontSize: "14px",
+            color: mutedColor,
+          }}
+        >
+          5 / 6
+        </div>
+      </div>
+    );
+  };
+
+  // Slide 6: Study Context
+  const ContextSlide = () => {
+    const details = [
+      { label: "Course", value: "CS101 – Introduction to Programming" },
+      { label: "Topic", value: "Python Loops" },
+      { label: "Submissions", value: "50 student assignments" },
+      { label: "Instructor", value: "Senior Lecturer, 8 years experience" },
+      { label: "Institution", value: "Mid-sized University CS Department" },
+    ];
+
+    return (
+      <div style={cardStyles}>
+        <div
+          style={{
+            position: "absolute",
+            top: "60px",
+            left: "60px",
+            display: "flex",
+            alignItems: "center",
+            gap: "12px",
+          }}
+        >
+          <div
+            style={{
+              width: "32px",
+              height: "32px",
+              backgroundColor: brandGreen,
+              borderRadius: "6px",
+            }}
+          />
+          <span
+            style={{
+              fontSize: "18px",
+              fontWeight: "600",
+              color: accentColor,
+              letterSpacing: "-0.02em",
+            }}
+          >
+            GradeInstant
+          </span>
+        </div>
+
+        <div style={{ width: "100%", padding: "0 100px" }}>
+          <p
+            style={{
+              fontSize: "16px",
+              fontWeight: "500",
+              color: mutedColor,
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              marginBottom: "60px",
+            }}
+          >
+            Study Context
+          </p>
+
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "0",
+              border: `1px solid ${lightGray}`,
+              borderRadius: "12px",
+              overflow: "hidden",
+            }}
+          >
+            {details.map((detail, i) => (
+              <div
+                key={i}
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  padding: "28px 32px",
+                  borderBottom:
+                    i < details.length - 1 ? `1px solid ${lightGray}` : "none",
+                  backgroundColor: i % 2 === 0 ? "#FAFAFA" : "#FFFFFF",
+                }}
+              >
+                <span
+                  style={{
+                    fontSize: "18px",
+                    color: mutedColor,
+                    fontWeight: "500",
+                  }}
+                >
+                  {detail.label}
+                </span>
+                <span
+                  style={{
+                    fontSize: "18px",
+                    color: accentColor,
+                    fontWeight: "500",
+                    textAlign: "right",
+                  }}
+                >
+                  {detail.value}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          <div
+            style={{
+              marginTop: "60px",
+              textAlign: "center",
+            }}
+          >
+            <p
+              style={{
+                fontSize: "18px",
+                color: mutedColor,
+                marginBottom: "24px",
+              }}
+            >
+              Ready to reduce your grading workload?
+            </p>
+            <div
+              style={{
+                display: "inline-block",
+                padding: "16px 48px",
+                backgroundColor: accentColor,
+                borderRadius: "8px",
+                color: "#FFF",
+                fontSize: "18px",
+                fontWeight: "600",
+              }}
+            >
+              gradeinstant.com
+            </div>
+          </div>
+        </div>
+
+        <div
+          style={{
+            position: "absolute",
+            bottom: "60px",
+            right: "60px",
+            fontSize: "14px",
+            color: mutedColor,
+          }}
+        >
+          6 / 6
+        </div>
+      </div>
+    );
+  };
+
+  const slideComponents = [
+    <HeroSlide key="hero" />,
+    <ComparisonSlide key="comparison" />,
+    <BreakdownSlide key="breakdown" />,
+    <ProcessSlide key="process" />,
+    <QualitativeSlide key="qualitative" />,
+    <ContextSlide key="context" />,
+  ];
+
+  return (
+    <div style={baseStyles}>
+      <div
+        style={{
+          maxWidth: "1200px",
+          margin: "0 auto",
+          marginBottom: "32px",
+        }}
+      >
+        <h1
+          style={{
+            fontSize: "24px",
+            fontWeight: "600",
+            color: accentColor,
+            marginBottom: "8px",
+          }}
+        >
+          GradeInstant Case Study Carousel
+        </h1>
+        <p
+          style={{
+            fontSize: "16px",
+            color: mutedColor,
+          }}
+        >
+          6 slides optimized for LinkedIn (1080×1080px)
+        </p>
+      </div>
+
+      {/* Navigation */}
+      <div
+        style={{
+          display: "flex",
+          gap: "12px",
+          marginBottom: "24px",
+          maxWidth: "1200px",
+          margin: "0 auto 24px",
+        }}
+      >
+        {slides.map((slide, i) => (
+          <button
+            key={slide}
+            onClick={() => setCurrentSlide(i)}
+            style={{
+              padding: "12px 20px",
+              backgroundColor: currentSlide === i ? accentColor : "#E4E4E7",
+              color: currentSlide === i ? "#FFF" : accentColor,
+              border: "none",
+              borderRadius: "6px",
+              fontSize: "14px",
+              fontWeight: "500",
+              cursor: "pointer",
+              textTransform: "capitalize",
+            }}
+          >
+            {slide}
+          </button>
+        ))}
+      </div>
+
+      {/* Slide Display */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          overflow: "auto",
+        }}
+      >
+        {slideComponents[currentSlide]}
+      </div>
+
+      <p
+        style={{
+          textAlign: "center",
+          marginTop: "24px",
+          fontSize: "14px",
+          color: mutedColor,
+        }}
+      >
+        Right-click each slide → "Save image" or screenshot at 1080×1080
+      </p>
+    </div>
+  );
+}
