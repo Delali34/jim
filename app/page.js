@@ -3,11 +3,11 @@ import React, { useState } from "react";
 
 const slides = [
   "hero",
+  "context",
+  "process",
   "comparison",
   "breakdown",
-  "process",
   "qualitative",
-  "context",
 ];
 
 export default function CaseStudyCarousel() {
@@ -316,12 +316,12 @@ export default function CaseStudyCarousel() {
           color: mutedColor,
         }}
       >
-        2 / 6
+        4 / 6
       </div>
     </div>
   );
 
-  // Slide 3: Time Breakdown - What GradeInstant Eliminates
+  // Slide 5: Time Breakdown - What GradeInstant Eliminates
   const BreakdownSlide = () => {
     const manualTasks = [
       { name: "Code Review & Execution", time: 3 },
@@ -682,13 +682,13 @@ export default function CaseStudyCarousel() {
             color: mutedColor,
           }}
         >
-          3 / 6
+          5 / 6
         </div>
       </div>
     );
   };
 
-  // Slide 4: Process Comparison
+  // Slide 3: Process Comparison
   const ProcessSlide = () => {
     const manualSteps = [
       "Open code files & run program",
@@ -900,13 +900,13 @@ export default function CaseStudyCarousel() {
             color: mutedColor,
           }}
         >
-          4 / 6
+          3 / 6
         </div>
       </div>
     );
   };
 
-  // Slide 5: Qualitative Findings
+  // Slide 6: Beyond the Numbers
   const QualitativeSlide = () => {
     const findings = [
       "Improved consistency in grading",
@@ -1010,6 +1010,36 @@ export default function CaseStudyCarousel() {
               </div>
             ))}
           </div>
+
+          <div
+            style={{
+              marginTop: "60px",
+              textAlign: "center",
+            }}
+          >
+            <p
+              style={{
+                fontSize: "18px",
+                color: mutedColor,
+                marginBottom: "24px",
+              }}
+            >
+              Ready to reduce your grading workload?
+            </p>
+            <div
+              style={{
+                display: "inline-block",
+                padding: "16px 48px",
+                backgroundColor: accentColor,
+                borderRadius: "8px",
+                color: "#FFF",
+                fontSize: "18px",
+                fontWeight: "600",
+              }}
+            >
+              gradeinstant.com
+            </div>
+          </div>
         </div>
 
         <div
@@ -1021,13 +1051,13 @@ export default function CaseStudyCarousel() {
             color: mutedColor,
           }}
         >
-          5 / 6
+          6 / 6
         </div>
       </div>
     );
   };
 
-  // Slide 6: Study Context
+  // Slide 2: Study Context
   const ContextSlide = () => {
     const details = [
       { label: "Course", value: "CS101 – Introduction to Programming" },
@@ -1128,36 +1158,6 @@ export default function CaseStudyCarousel() {
               </div>
             ))}
           </div>
-
-          <div
-            style={{
-              marginTop: "60px",
-              textAlign: "center",
-            }}
-          >
-            <p
-              style={{
-                fontSize: "18px",
-                color: mutedColor,
-                marginBottom: "24px",
-              }}
-            >
-              Ready to reduce your grading workload?
-            </p>
-            <div
-              style={{
-                display: "inline-block",
-                padding: "16px 48px",
-                backgroundColor: accentColor,
-                borderRadius: "8px",
-                color: "#FFF",
-                fontSize: "18px",
-                fontWeight: "600",
-              }}
-            >
-              gradeinstant.com
-            </div>
-          </div>
         </div>
 
         <div
@@ -1169,7 +1169,7 @@ export default function CaseStudyCarousel() {
             color: mutedColor,
           }}
         >
-          6 / 6
+          2 / 6
         </div>
       </div>
     );
@@ -1177,11 +1177,11 @@ export default function CaseStudyCarousel() {
 
   const slideComponents = [
     <HeroSlide key="hero" />,
+    <ContextSlide key="context" />,
+    <ProcessSlide key="process" />,
     <ComparisonSlide key="comparison" />,
     <BreakdownSlide key="breakdown" />,
-    <ProcessSlide key="process" />,
     <QualitativeSlide key="qualitative" />,
-    <ContextSlide key="context" />,
   ];
 
   return (
