@@ -321,17 +321,28 @@ export default function CaseStudyCarousel() {
     </div>
   );
 
-  // Slide 3: Time Breakdown
+  // Slide 3: Time Breakdown - What GradeInstant Eliminates
   const BreakdownSlide = () => {
-    const tasks = [
-      { name: "Code Review & Execution", time: 3, width: "31.6%" },
-      { name: "Logic & Style Evaluation", time: 2, width: "21%" },
-      { name: "AI/Plagiarism Check", time: 1.5, width: "15.8%" },
-      { name: "Writing Feedback", time: 2.5, width: "26.3%" },
-      { name: "LMS Grade Entry", time: 0.5, width: "5.3%" },
+    const manualTasks = [
+      { name: "Code Review & Execution", time: 3 },
+      { name: "Logic & Style Evaluation", time: 2 },
+      { name: "AI/Plagiarism Check", time: 1.5 },
+      { name: "Writing Feedback", time: 2.5 },
+      { name: "LMS Grade Entry", time: 0.5 },
     ];
 
-    const colors = ["#18181B", "#3F3F46", "#52525B", "#71717A", "#A1A1AA"];
+    const autoTasks = [
+      { name: "Upload submissions", time: 5 },
+      {
+        name: "Auto-test, auto-grade & generate personalized quizzes",
+        time: 12,
+      },
+      { name: "Send results instantly & sync directly to LMS", time: 3 },
+    ];
+
+    const totalManual = manualTasks.reduce((sum, t) => sum + t.time, 0);
+    const totalManualBatch = totalManual * 50;
+    const totalAuto = autoTasks.reduce((sum, t) => sum + t.time, 0);
 
     return (
       <div style={cardStyles}>
@@ -365,109 +376,300 @@ export default function CaseStudyCarousel() {
           </span>
         </div>
 
-        <div style={{ width: "100%", padding: "0 80px" }}>
+        <div style={{ width: "100%", padding: "0 60px" }}>
           <p
             style={{
-              fontSize: "16px",
+              fontSize: "15px",
               fontWeight: "500",
               color: mutedColor,
               letterSpacing: "0.1em",
               textTransform: "uppercase",
-              marginBottom: "24px",
+              marginBottom: "32px",
             }}
           >
-            Where Manual Grading Time Goes
+            Time Breakdown for 50 Assignments
           </p>
 
-          <p
-            style={{
-              fontSize: "24px",
-              color: accentColor,
-              marginBottom: "60px",
-              fontWeight: "400",
-            }}
-          >
-            Average <strong>9.5 minutes</strong> per assignment
-          </p>
-
-          {/* Stacked bar */}
-          <div
-            style={{
-              display: "flex",
-              height: "80px",
-              borderRadius: "8px",
-              overflow: "hidden",
-              marginBottom: "48px",
-            }}
-          >
-            {tasks.map((task, i) => (
+          <div style={{ display: "flex", gap: "40px" }}>
+            {/* Manual Column */}
+            <div style={{ flex: 1 }}>
               <div
-                key={i}
                 style={{
-                  width: task.width,
-                  backgroundColor: colors[i],
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
+                  padding: "16px 20px",
+                  backgroundColor: "#F4F4F5",
+                  borderRadius: "8px 8px 0 0",
+                  borderBottom: `2px solid ${lightGray}`,
                 }}
               >
                 <span
                   style={{
-                    color: "#FFF",
                     fontSize: "16px",
                     fontWeight: "600",
+                    color: mutedColor,
                   }}
                 >
-                  {task.time}m
+                  Manual Grading
+                </span>
+                <span
+                  style={{
+                    fontSize: "14px",
+                    color: mutedColor,
+                    marginLeft: "8px",
+                  }}
+                >
+                  (per assignment)
                 </span>
               </div>
-            ))}
-          </div>
 
-          {/* Legend */}
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "20px" }}
-          >
-            {tasks.map((task, i) => (
               <div
-                key={i}
                 style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
+                  backgroundColor: "#F4F4F5",
+                  borderRadius: "0 0 8px 8px",
+                  padding: "8px 0",
                 }}
               >
-                <div
-                  style={{ display: "flex", alignItems: "center", gap: "16px" }}
-                >
+                {manualTasks.map((task, i) => (
                   <div
+                    key={i}
                     style={{
-                      width: "16px",
-                      height: "16px",
-                      backgroundColor: colors[i],
-                      borderRadius: "3px",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      padding: "12px 20px",
                     }}
-                  />
+                  >
+                    <span style={{ fontSize: "15px", color: "#52525B" }}>
+                      {task.name}
+                    </span>
+                    <span
+                      style={{
+                        fontSize: "16px",
+                        fontWeight: "600",
+                        color: mutedColor,
+                      }}
+                    >
+                      {task.time}m
+                    </span>
+                  </div>
+                ))}
+
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    padding: "16px 20px",
+                    borderTop: `1px solid ${lightGray}`,
+                    marginTop: "8px",
+                  }}
+                >
                   <span
                     style={{
-                      fontSize: "18px",
+                      fontSize: "15px",
+                      fontWeight: "600",
                       color: accentColor,
                     }}
                   >
-                    {task.name}
+                    Per assignment
+                  </span>
+                  <span
+                    style={{
+                      fontSize: "18px",
+                      fontWeight: "700",
+                      color: accentColor,
+                    }}
+                  >
+                    {totalManual}m
                   </span>
                 </div>
+              </div>
+
+              <div
+                style={{
+                  marginTop: "12px",
+                  padding: "16px 20px",
+                  backgroundColor: "#18181B",
+                  borderRadius: "8px",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
                 <span
                   style={{
-                    fontSize: "18px",
+                    fontSize: "15px",
                     fontWeight: "600",
-                    color: accentColor,
+                    color: "#A1A1AA",
                   }}
                 >
-                  {task.time} min
+                  × 50 assignments
+                </span>
+                <span
+                  style={{ fontSize: "20px", fontWeight: "700", color: "#FFF" }}
+                >
+                  475m
                 </span>
               </div>
-            ))}
+            </div>
+
+            {/* GradeInstant Column */}
+            <div style={{ flex: 1 }}>
+              <div
+                style={{
+                  padding: "16px 20px",
+                  backgroundColor: "#ECFDF5",
+                  borderRadius: "8px 8px 0 0",
+                  borderBottom: `2px solid ${brandGreen}`,
+                }}
+              >
+                <span
+                  style={{
+                    fontSize: "16px",
+                    fontWeight: "600",
+                    color: "#065F46",
+                  }}
+                >
+                  GradeInstant
+                </span>
+                <span
+                  style={{
+                    fontSize: "14px",
+                    color: "#065F46",
+                    marginLeft: "8px",
+                  }}
+                >
+                  (entire batch)
+                </span>
+              </div>
+
+              <div
+                style={{
+                  backgroundColor: "#ECFDF5",
+                  borderRadius: "0 0 8px 8px",
+                  padding: "8px 0",
+                }}
+              >
+                {autoTasks.map((task, i) => (
+                  <div
+                    key={i}
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      padding: "12px 20px",
+                    }}
+                  >
+                    <span style={{ fontSize: "15px", color: "#065F46" }}>
+                      {task.name}
+                    </span>
+                    <span
+                      style={{
+                        fontSize: "16px",
+                        fontWeight: "600",
+                        color: brandGreen,
+                      }}
+                    >
+                      {task.time}m
+                    </span>
+                  </div>
+                ))}
+
+                {/* Spacer to align with manual side */}
+                <div style={{ height: "96px" }}></div>
+
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    padding: "16px 20px",
+                    borderTop: `1px solid #A7F3D0`,
+                    marginTop: "8px",
+                  }}
+                >
+                  <span
+                    style={{
+                      fontSize: "15px",
+                      fontWeight: "600",
+                      color: "#065F46",
+                    }}
+                  >
+                    Total
+                  </span>
+                  <span
+                    style={{
+                      fontSize: "18px",
+                      fontWeight: "700",
+                      color: "#065F46",
+                    }}
+                  >
+                    {totalAuto}m
+                  </span>
+                </div>
+              </div>
+
+              <div
+                style={{
+                  marginTop: "12px",
+                  padding: "16px 20px",
+                  backgroundColor: brandGreen,
+                  borderRadius: "8px",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <span
+                  style={{
+                    fontSize: "15px",
+                    fontWeight: "600",
+                    color: "#ECFDF5",
+                  }}
+                >
+                  All 50 done in
+                </span>
+                <span
+                  style={{ fontSize: "20px", fontWeight: "700", color: "#FFF" }}
+                >
+                  20m
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Total time saved */}
+          <div
+            style={{
+              marginTop: "32px",
+              padding: "20px 24px",
+              backgroundColor: "#18181B",
+              borderRadius: "8px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "32px",
+            }}
+          >
+            <span style={{ fontSize: "16px", color: "#A1A1AA" }}>
+              Time saved:
+            </span>
+            <span
+              style={{ fontSize: "28px", fontWeight: "700", color: brandGreen }}
+            >
+              7 hours 35 minutes
+            </span>
+            <span
+              style={{
+                fontSize: "14px",
+                fontWeight: "600",
+                color: "#FFF",
+                backgroundColor: brandGreen,
+                padding: "6px 12px",
+                borderRadius: "100px",
+              }}
+            >
+              95.8% reduction
+            </span>
           </div>
         </div>
 
